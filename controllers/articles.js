@@ -32,12 +32,14 @@ router.get('/new', (req, res) => {
 router.get('/:id', (req, res) => {
   db.article.findOne({
     where: { id: req.params.id },
-    include: [db.author]
+    include: [db.author, db.comment],
   })
   .then((article) => {
     if (!article) throw Error()
-    console.log(article.author)
-    res.render('articles/show', { article: article })
+    //console.log('ARTICLE, LOOK FOR ID', article);
+    //console.log('ARTICLE.AUTHOR', article.author);
+    //console.log('ARTICLE.COMMENTS', article.comments); //has to be plural? why //answer: sequelize knows that the relationship between article and comments is one to many, while relationship of article to author is one to one 
+    res.render('articles/show', { article: article, comments: article.comments })
   })
   .catch((error) => {
     console.log(error)
@@ -46,3 +48,4 @@ router.get('/:id', (req, res) => {
 })
 
 module.exports = router
+

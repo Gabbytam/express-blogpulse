@@ -19,6 +19,7 @@ app.use((req, res, next) => {
 // bring in authors and articles controllers
 app.use('/authors', require('./controllers/authors'))
 app.use('/articles', require('./controllers/articles'))
+app.use('/comments', require('./controllers/comments'))
 
 // GET / - display all articles and their authors
 app.get('/', (req, res) => {
