@@ -1,10 +1,20 @@
-<h1><%= article.title %> <small>by <%= article.author.getFullName() %></small></h1>
+<h1><%= article.title %> <small>by <a href='/authors/<%= article.authorId %>'> <%= article.author.getFullName() %> </a></small></h1>
 
 <p>
   <strong><%= moment(article.createdAt).calendar() %></strong>
 </p>
 
 <p><%= article.content %></p>
+
+<hr />
+
+<h3>Comments</h3>
+<% comments.forEach(comment=> { %>
+  <div class='well'>
+    <p> <%= comment.content %> </p>
+    <strong> <p>- <%= comment.name %></p> </strong>
+  </div>
+<% }) %>
 
 <hr />
 
@@ -24,12 +34,6 @@
   <input type='submit' class='btn btn-primary'>
 </form>
 
-<h3>Comments</h3>
-<% comments.forEach(comment=> { %>
-  <div class='commentBody'>
-    <p> <%= comment.content %> </p>
-    <p>- <%= comment.name %></p>
-  </div>
-<% }) %>
+<hr />
 
 <a href="/">&larr; Back Home</a>
